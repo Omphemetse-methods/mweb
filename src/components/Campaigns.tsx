@@ -1,34 +1,65 @@
 import useCampaign from "hooks/useCampaign";
 
-const Campaigns = () => {
-  const { loading, campaigns } = useCampaign();
+interface CampaignType {
+  links: string[];
+  code: string;
+  name: string;
+  decsription: string;
+  category: string;
+  urlSlug: string;
+  isStandardCampaign: string;
+  isPrivateCampaign: string;
+  promocodes: string[];
+}
 
-  console.log("campaigns:", campaigns);
+interface CampaignProps {
+  campaigns: CampaignType[];
+  selectedCampaignCode: string;
+  handleSelectCampaign: Function;
+}
 
-  if (loading) {
-    return (
-      <section>
-        <p>Loading campaigns</p>
-      </section>
-    );
-  }
-
+const Campaigns = ({
+  campaigns,
+  selectedCampaignCode,
+  handleSelectCampaign,
+}: CampaignProps) => {
   return (
-    <div>
-      <p>Campaigns</p>
+    <div className="flex flex-col justify-center items-center">
+      {campaigns.length !== 0 && (
+        <>
+          <ul className="w-5/12 grid grid-cols-3 gap-6">
+            {campaigns.map((campaign) => {
+              const checked =
+                selectedCampaignCode === campaign.code ? true : false;
 
-      <section className="flex justify-center">
-        <ul className="w-6/12 grid grid-cols-3 gap-4">
-          {["1", "4", "5"].map((campaign) => (
-            <li
-              key={campaign}
-              className="ring-1 ring-green-100 px-4 py-1 rounded-md"
-            >
-              <p>Campaign</p>
-            </li>
-          ))}
-        </ul>
-      </section>
+              return (
+                <li
+                  key={campaign.code}
+                  className={`col-span-1 grid grid-cols-12 p-2 rounded-md ${
+                    checked
+                      ? "transition ease-in-out delay-50 shadow-md scale-110 bg-indigo-500 text-white border-2 border-pink-50 ring-2 ring-purple-200"
+                      : "ring-1 ring-purple-100"
+                  }`}
+                >
+                  <div className="col-span-10">
+                    <label className="text-xs">{campaign.name}</label>
+                  </div>
+                  <div className="col-span-2 flex justify-end">
+                    <input
+                      type="radio"
+                      id={campaign.code}
+                      value={campaign.code}
+                      checked={checked}
+                      onChange={(event) => handleSelectCampaign(event)}
+                      className=""
+                    />
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        </>
+      )}
     </div>
   );
 };
