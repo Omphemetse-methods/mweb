@@ -188,55 +188,123 @@ const LandingPage = () => {
   }, [selectedProviders]);
 
   //
-  if (loading) {
-    return (
-      <div className="w-screen h-screen flex flex-col justify-center items-center">
-        <p>Loading...</p>
-      </div>
-    );
-  }
 
   return (
     <div className="max-w-screen min-h-screen space-y-4">
-      <div className="flex flex-col justify-center items-center">
-        {campaigns.length !== 0 && (
-          <>
-            <p className="pb-4">Deal Type</p>
+      <section className="bg-white dark:bg-gray-800">
+        <nav className="container p-6 mx-auto lg:flex lg:justify-between lg:items-center">
+          <div className="flex items-center justify-between">
+            <div>
+              <a
+                className="text-2xl font-bold text-gray-800 dark:text-white lg:text-3xl hover:text-gray-700 dark:hover:text-gray-300"
+                href="#"
+              >
+                Brand
+              </a>
+            </div>
 
-            <ul className="w-5/12 grid grid-cols-3 gap-6">
-              {campaigns.map((campaign) => {
-                const checked =
-                  selectedCampaignCode === campaign.code ? true : false;
+            <div className="flex lg:hidden">
+              <button
+                type="button"
+                className="btn-primary"
+                aria-label="toggle menu"
+              >
+                Sign Up
+              </button>
+            </div>
+          </div>
 
-                return (
-                  <li
-                    key={campaign.code}
-                    className={`col-span-1 grid grid-cols-12 p-2 rounded-md ${
-                      checked
-                        ? "transition ease-in-out delay-50 shadow-md scale-110 bg-gray-100 border-2 border-green-100 ring-2 ring-purple-200"
-                        : "ring-1 ring-purple-100"
-                    }`}
-                  >
-                    <div className="col-span-10">
-                      <label className="text-xs">{campaign.name}</label>
-                    </div>
-                    <div className="col-span-2 flex justify-end">
-                      <input
-                        type="radio"
-                        id={campaign.code}
-                        value={campaign.code}
-                        checked={checked}
-                        onChange={handleSelectCampaign}
-                        className=""
-                      />
-                    </div>
-                  </li>
-                );
-              })}
-            </ul>
-          </>
-        )}
-      </div>
+          <div className="flex flex-col mt-4 space-y-2 lg:mt-0 lg:flex-row lg:-px-8 lg:space-y-0">
+            <a
+              className="mx-8 text-gray-700 transition-colors duration-200 transform dark:text-gray-200 dark:hover:text-blue-400 hover:text-blue-500"
+              href="#"
+            >
+              Home
+            </a>
+            <a
+              className="mx-8 text-gray-700 transition-colors duration-200 transform dark:text-gray-200 dark:hover:text-blue-400 hover:text-blue-500"
+              href="#"
+            >
+              Components
+            </a>
+            <a
+              className="mx-8 text-gray-700 transition-colors duration-200 transform dark:text-gray-200 dark:hover:text-blue-400 hover:text-blue-500"
+              href="#"
+            >
+              Pricing
+            </a>
+            <a
+              className="mx-8 text-gray-700 transition-colors duration-200 transform dark:text-gray-200 dark:hover:text-blue-400 hover:text-blue-500"
+              href="#"
+            >
+              Contact
+            </a>
+          </div>
+
+          <a
+            className="block px-5 py-2 mt-4 font-medium leading-5 text-center text-white capitalize bg-blue-600 rounded-lg lg:mt-0 hover:bg-blue-500 lg:w-auto"
+            href="#"
+          >
+            Get started
+          </a>
+        </nav>
+
+        <div className="container px-6 py-4 mx-auto text-center">
+          <div className="max-w-lg mx-auto">
+            <h1 className="text-3xl font-bold text-gray-800 dark:text-white md:text-4xl">
+              Stream all you want Work and play No contracts
+            </h1>
+            <p className="mt-6 text-gray-500 dark:text-gray-300">
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Libero
+              similique obcaecati illum mollitia.
+            </p>
+
+            <p className="mt-3 text-sm text-gray-400 ">
+              No credit card required
+            </p>
+          </div>
+
+          <div className="flex flex-col justify-center items-center">
+            {campaigns.length !== 0 && (
+              <>
+                <p className="pb-4">Select a deal type</p>
+
+                <ul className="w-5/12 grid grid-cols-3 gap-6">
+                  {campaigns.map((campaign) => {
+                    const checked =
+                      selectedCampaignCode === campaign.code ? true : false;
+
+                    return (
+                      <li
+                        key={campaign.code}
+                        className={`col-span-1 grid grid-cols-12 p-2 rounded-md ${
+                          checked
+                            ? "transition ease-in-out delay-50 shadow-md scale-110 bg-indigo-500 text-white border-2 border-pink-50 ring-2 ring-purple-200"
+                            : "ring-1 ring-purple-100"
+                        }`}
+                      >
+                        <div className="col-span-10">
+                          <label className="text-xs">{campaign.name}</label>
+                        </div>
+                        <div className="col-span-2 flex justify-end">
+                          <input
+                            type="radio"
+                            id={campaign.code}
+                            value={campaign.code}
+                            checked={checked}
+                            onChange={handleSelectCampaign}
+                            className=""
+                          />
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </>
+            )}
+          </div>
+        </div>
+      </section>
 
       {productsLoading && (
         <section className="flex justify-center">
@@ -247,7 +315,7 @@ const LandingPage = () => {
       <section className="flex justify-center">
         {providers && productsLoading === false ? (
           <div className="w-8/12 space-y-4">
-            <ul className="grid grid-cols-4 gap-4">
+            <ul className="grid grid-cols-4 gap-4 px-20">
               <>
                 {providers.map((provider) => (
                   <li key={provider} className="col-span-1 flex items-center">
@@ -267,37 +335,34 @@ const LandingPage = () => {
                 ))}
               </>
             </ul>
+
+            <section className="flex flex-col items-center justify-center">
+              <p>Display products</p>
+
+              {filteredProducts && (
+                <section className="w-full">
+                  <p>{filteredProducts.length} products found</p>
+                  <ul className="grid grid-cols-3 gap-4">
+                    {filteredProducts.map((product) => (
+                      <li
+                        key={product.productName + product.productCode}
+                        className="ring-1 ring-purple-100 rounded-md p-3 text-xs"
+                      >
+                        <p>{product.productName}</p>
+                        <p>{product.productCode}</p>
+                        <p>{product.productRate}</p>
+                        <p>{product.subcategory}</p>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              )}
+            </section>
           </div>
         ) : null}
       </section>
 
       <section>Price range</section>
-
-      <section className="flex flex-col items-center justify-center">
-        <p>Display products</p>
-
-        {filteredProducts && (
-          <section className="w-8/12">
-            <p>{filteredProducts.length} products found</p>
-            <ul className="grid grid-cols-2 gap-4">
-              {filteredProducts.map((product) => (
-                <li
-                  key={product.productName + product.productCode}
-                  className="ring-1 ring-purple-100 rounded-md p-3 text-xs"
-                >
-                  <p>{product.productName}</p>
-                  <p>{product.productCode}</p>
-                  <p>{product.productRate}</p>
-                  <p>{product.subcategory}</p>
-                  <p>{product.productDescription}</p>
-                </li>
-              ))}
-            </ul>
-          </section>
-        )}
-      </section>
-
-      <Footer />
     </div>
   );
 };
