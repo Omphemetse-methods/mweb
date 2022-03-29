@@ -23,7 +23,7 @@ const Providers = ({
               className="col-span-1 flex items-center space-x-1"
             >
               <input
-                type="radio"
+                type="checkbox"
                 id={provider}
                 value={provider}
                 onChange={(event) => handleSelectProvider(event)}

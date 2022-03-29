@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 import Campaigns from "components/Campaigns";
 import Providers from "components/Providers";
+import Products from "components/Products";
 
 import Footer from "components/Footer";
 
@@ -22,7 +23,6 @@ interface summarizedProductType {
   productName: string;
   productRate: string;
   subcategory: string;
-  productDescription: string;
 }
 
 const LandingPage = () => {
@@ -137,7 +137,6 @@ const LandingPage = () => {
         // update a list of summarized products
         summarizedProducts.push({
           productName: product.productName,
-          productDescription: product.productDescription,
           productCode: product.productCode,
           productRate: product.productRate,
           subcategory: product.subcategory,
@@ -237,31 +236,7 @@ const LandingPage = () => {
               </div>
             </section>
 
-            <section className="flex flex-col items-center justify-center">
-              <p>Display products</p>
-
-              {filteredProducts && (
-                <section className="w-full">
-                  <p>{filteredProducts.length} products found</p>
-                  <ul className="grid grid-cols-3 gap-4">
-                    {filteredProducts.map((product) => (
-                      <li
-                        key={product.productName + product.productCode}
-                        className="ring-1 ring-purple-100 rounded-md p-3 text-xs"
-                      >
-                        <p>{product.productName}</p>
-                        <p>{product.productCode}</p>
-                        <p>{product.productRate}</p>
-                        <p>{product.subcategory}</p>
-                        <button className="btn-primary bg-gray-50 text-gray-900">
-                          Check Coverage
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
-                </section>
-              )}
-            </section>
+            <Products filteredProducts={filteredProducts} />
           </div>
         ) : null}
       </section>
