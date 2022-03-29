@@ -203,7 +203,7 @@ const LandingPage = () => {
           <>
             <p className="pb-4">Deal Type</p>
 
-            <ul className="w-6/12 grid grid-cols-3 gap-6">
+            <ul className="w-5/12 grid grid-cols-3 gap-6">
               {campaigns.map((campaign) => {
                 const checked =
                   selectedCampaignCode === campaign.code ? true : false;
@@ -213,7 +213,7 @@ const LandingPage = () => {
                     key={campaign.code}
                     className={`col-span-1 grid grid-cols-12 p-2 rounded-md ${
                       checked
-                        ? "bg-gray-100 ring-2 ring-purple-200"
+                        ? "transition ease-in-out delay-50 shadow-md scale-110 bg-gray-100 border-2 border-green-100 ring-2 ring-purple-200"
                         : "ring-1 ring-purple-100"
                     }`}
                   >
@@ -222,7 +222,7 @@ const LandingPage = () => {
                     </div>
                     <div className="col-span-2 flex justify-end">
                       <input
-                        type="checkbox"
+                        type="radio"
                         id={campaign.code}
                         value={campaign.code}
                         checked={checked}
@@ -247,27 +247,25 @@ const LandingPage = () => {
       <section className="flex justify-center">
         {providers && productsLoading === false ? (
           <div className="w-8/12 space-y-4">
-            <section className="flex justify-end">
-              <button className="bg-purple-400 text-white px-6 py-1 rounded-md">
-                More Filters
-              </button>
-            </section>
-
             <ul className="grid grid-cols-4 gap-4">
-              {providers.map((provider) => (
-                <li key={provider} className="col-span-1 flex items-center">
-                  <input
-                    type="checkbox"
-                    id={provider}
-                    value={provider}
-                    onChange={handleSelectProvider}
-                    checked={
-                      selectedProviders.indexOf(provider) === -1 ? false : true
-                    }
-                  />
-                  <label className="text-xs">{provider}</label>
-                </li>
-              ))}
+              <>
+                {providers.map((provider) => (
+                  <li key={provider} className="col-span-1 flex items-center">
+                    <input
+                      type="radio"
+                      id={provider}
+                      value={provider}
+                      onChange={handleSelectProvider}
+                      checked={
+                        selectedProviders.indexOf(provider) === -1
+                          ? false
+                          : true
+                      }
+                    />
+                    <label className="text-xs">{provider}</label>
+                  </li>
+                ))}
+              </>
             </ul>
           </div>
         ) : null}
