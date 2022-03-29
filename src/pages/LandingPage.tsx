@@ -189,59 +189,102 @@ const LandingPage = () => {
     setFilteredProducts(x);
   }, [selectedProviders]);
 
-  //
+  // filter by price: TODO
+  const priceRanges = [
+    { min: 0, max: 699, label: "R0 - R699" },
+    { min: 700, max: 999, label: "R700 - R999" },
+    { min: 1000, max: 9999, label: "R1000+" },
+  ];
+  const [selectePrice, setSelectedPrice] = useState("all");
+
+  // filter products based on price
+  function handlePriceFilter({
+    min,
+    max,
+    label,
+  }: {
+    min: Number;
+    max: Number;
+    label: string;
+  }) {
+    // TODO
+    //const;
+  }
 
   return (
     <div className="max-w-screen min-h-screen space-y-4">
-      <Campaigns
-        campaigns={campaigns}
-        selectedCampaignCode={selectedCampaignCode}
-        handleSelectCampaign={handleSelectCampaign}
-      />
+      <section className="flex justify-center">
+        <div className="w-11/12 md:w-10/12 space-y-3">
+          <section className="flex justify-between items-center font-fuzzy py-2">
+            <p>
+              MWEB <span className="text-xs">log</span>
+            </p>
+            <div className="flex space-x-2 items-center text-xs">
+              <button className="">Coverage</button>
+              <button className="">Help Center</button>
+              <button className="px-5 py-2 mt-4 text-sm text-center text-gray-700 capitalize transition-colors duration-200 transform border rounded-md dark:hover:bg-gray-700 dark:text-white lg:mt-0 hover:bg-gray-100 lg:w-auto">
+                Login
+              </button>
+            </div>
+          </section>
 
-      {productsLoading && (
-        <section className="flex justify-center">
-          <p>Products loading</p>
-        </section>
-      )}
+          <section className="flex flex-col items-center items-center space-y-2 pb-8">
+            <h1 className="text-xl font-bold text-gray-800 dark:text-white md:text-3xl pt-10">
+              Stream all you want, work and play. No contracts
+            </h1>
+            <p className="w-8/12 text-center font-fuzzy mt-6 text-gray-500 dark:text-gray-300">
+              Get fast fibre delivered fast at your doorstep. Order your plug
+              and play router now.Change the way you see the world.
+            </p>
+
+            <div className="w-full">
+              <Campaigns
+                campaigns={campaigns}
+                selectedCampaignCode={selectedCampaignCode}
+                handleSelectCampaign={handleSelectCampaign}
+              />
+            </div>
+          </section>
+        </div>
+      </section>
 
       <section className="flex justify-center">
         {providers && productsLoading === false ? (
-          <div className="w-8/12 space-y-4">
+          <div className="w-full px-2 md:px-0  md:w-8/12 space-y-4 pb-8">
             <Providers
               providers={providers}
               handleSelectProvider={handleSelectProvider}
               selectedProviders={selectedProviders}
             />
 
-            <section>
-              <p>Price ranges</p>
-              <div className="flex items-center space-x-3">
-                <section className="col-span-1 flex items-center space-x-1">
-                  <input type="radio" />
-                  <label className="text-xs">All</label>
-                </section>
-                <section className="col-span-1 flex items-center space-x-1">
-                  <input type="radio" />
-                  <label className="text-xs">R0-R699</label>
-                </section>
-                <section className="col-span-1 flex items-center space-x-1">
-                  <input type="radio" />
-                  <label className="text-xs">R700-R999</label>
-                </section>
-                <section className="col-span-1 flex items-center space-x-1">
-                  <input type="radio" />
-                  <label className="text-xs">R1000+</label>
-                </section>
-              </div>
+            <section className="pb-4">
+              <p className="font-bold">Price ranges</p>
+              <ul className="flex space-x-8 items-center">
+                {priceRanges.map((priceRange) => (
+                  <li
+                    key={priceRange.min + priceRange.max}
+                    className="flex items-center space-x-1"
+                  >
+                    <input
+                      type="radio"
+                      onChange={() => handlePriceFilter(priceRange)}
+                    />
+                    <label className="text-xs font-fuzzy">
+                      {priceRange.label}
+                    </label>
+                  </li>
+                ))}
+              </ul>
             </section>
 
             <Products filteredProducts={filteredProducts} />
+
+            <section className="flex justify-center">
+              <button>Load more</button>
+            </section>
           </div>
         ) : null}
       </section>
-
-      <section>Price range</section>
     </div>
   );
 };

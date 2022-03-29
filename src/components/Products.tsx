@@ -12,24 +12,26 @@ interface ProductsProps {
 const Products = ({ filteredProducts }: ProductsProps) => {
   return (
     <section className="flex flex-col items-center justify-center">
-      <p>Display products</p>
-
       {filteredProducts && (
         <section className="w-full">
-          <p>{filteredProducts.length} products found</p>
-          <ul className="grid grid-cols-3 gap-4">
+          <ul className="grid grid-cols-3  gap-4 md:gap-8">
             {filteredProducts.map((product) => (
               <li
                 key={product.productName + product.productCode}
-                className="ring-1 ring-purple-100 rounded-md p-3 text-xs"
+                className="ring-1 ring-gray-600 rounded-md p-3 text-xs"
               >
-                <p>{product.productName}</p>
-                <p>{product.productCode}</p>
-                <p>{product.productRate}</p>
-                <p>{product.subcategory}</p>
-                <button className="btn-primary bg-gray-50 text-gray-900">
-                  Check Coverage
-                </button>
+                <section className="">
+                  <p className="font-bold">{product.productName}</p>
+                  <p>{product.productCode}</p>
+                  <p>{product.productRate}</p>
+                  <p>{product.subcategory}</p>
+                </section>
+
+                <section className="flex justify-center">
+                  <button className="btn-primary bg-gray-300 text-gray-900 py-1 px-2">
+                    Check Coverage
+                  </button>
+                </section>
               </li>
             ))}
           </ul>

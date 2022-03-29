@@ -10,18 +10,21 @@ const Providers = ({
   selectedProviders,
 }: ProvidersProps) => {
   return (
-    <section>
-      <p>Fibre Providers</p>
-      <p className="text-xs">
+    <section className="">
+      <p className="font-bold">Fibre Providers</p>
+      <p className="text-xs text-gray-900y">
         Select the fibre providers for which products should be displayed
       </p>
-      <ul className="grid grid-cols-4 gap-4 px-20">
+      <ul className="grid grid-cols-3 md:grid-cols-4 gap-4 px-20 py-3">
         <>
           {providers.map((provider) => (
             <li
               key={provider}
-              className="col-span-1 flex items-center space-x-1"
+              className="col-span-1 flex justify-end items-center space-x-1"
             >
+              <label className="text-xs font-fuzzy text-gray-900">
+                {provider}
+              </label>
               <input
                 type="checkbox"
                 id={provider}
@@ -31,7 +34,6 @@ const Providers = ({
                   selectedProviders.indexOf(provider) === -1 ? false : true
                 }
               />
-              <label className="text-xs">{provider}</label>
             </li>
           ))}
         </>

@@ -24,10 +24,12 @@ const Campaigns = ({
   handleSelectCampaign,
 }: CampaignProps) => {
   return (
-    <div className="flex flex-col justify-center items-center">
+    <div className="flex flex-col justify-center items-center space-y-2 py-6">
       {campaigns.length !== 0 && (
         <>
-          <ul className="w-5/12 grid grid-cols-3 gap-6">
+          <h2 className="font-fuzzy text-xs">Select the fibre campaign</h2>
+
+          <ul className="w-full md:w-5/12 grid grid-cols-3 gap-6">
             {campaigns.map((campaign) => {
               const checked =
                 selectedCampaignCode === campaign.code ? true : false;
@@ -37,8 +39,8 @@ const Campaigns = ({
                   key={campaign.code}
                   className={`col-span-1 grid grid-cols-12 p-2 rounded-md ${
                     checked
-                      ? "transition ease-in-out delay-50 shadow-md scale-110 bg-indigo-500 text-white border-2 border-pink-50 ring-2 ring-purple-200"
-                      : "ring-1 ring-purple-100"
+                      ? "transition ease-in-out delay-50 shadow-md scale-110 bg-indigo-500 text-white ring-1 ring-purple-600"
+                      : "ring-1 ring-gray-900"
                   }`}
                 >
                   <div className="col-span-10">
@@ -51,7 +53,7 @@ const Campaigns = ({
                       value={campaign.code}
                       checked={checked}
                       onChange={(event) => handleSelectCampaign(event)}
-                      className=""
+                      className="cursor-pointer"
                     />
                   </div>
                 </li>
